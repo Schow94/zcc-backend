@@ -6,12 +6,13 @@
 
 - Currently my (Stephen's) credentials are used
 - My credentials are in a .env file that is not committed to Github
-- If you wish to add your own credentials:
+- If you wish to add your own credentials, create a .env file in the root directory & add the following to it:
   - TOKEN={YOUR_TOKEN}
   - API_URL={YOUR_API_URL}
   - EMAIL={YOUR_EMAIL}
   - \*\* Replace YOUR_TOKEN with your token
   - \*\* Do not include curly brackets
+- If you require my credentials, send me an email and I can get them to you
 
 ### Required Dependencies:
 
