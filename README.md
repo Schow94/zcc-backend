@@ -31,4 +31,9 @@
 
 - npm start
 
+### How to run Express tests
+
+- npm install jest supertest --save-dev
+- npm run test
+
 ZCC - Backend needs to be running on localhost:5000 while ZCC - Frontend needs to be running on localhost:3000 in order to retrieve ticket data from Zendesk API

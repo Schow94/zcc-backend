@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+const axios = require("axios");
 const express = require("express");
 var zendesk = require("node-zendesk");
 var cors = require("cors");
@@ -22,11 +22,15 @@ var client = zendesk.createClient({
 app.get("/tickets", async (req, res, next) => {
 	try {
 		const tickets = client.tickets.list((err, req, result) => {
+			// Error occured while fetching API data
 			if (err) {
 				console.log("ERROR: ", err);
-				return;
+				const statusCode = err.statusCode;
+				res.status(statusCode).send({ error: err });
+			} else {
+				// Successfully fetched data
+				res.send({ tickets: result });
 			}
-			res.send({ tickets: result });
 		});
 	} catch (e) {
 		res.status(500).send(e);
@@ -81,6 +85,11 @@ app.use((err, req, res, next) => {
 	res.status.send(`500 - Server Error`);
 });
 
-app.listen(PORT, () => {
-	console.log(`Server is listening on port: ${PORT}`);
-});
+// JEST tries to use these ports in testing
+if (process.env.NODE_ENV !== "test") {
+	app.listen(PORT, () => {
+		console.log(`Server is listening on port: ${PORT}`);
+	});
+}
+
+module.exports = app;
